@@ -1,0 +1,23 @@
+.logo a {
+	display: inline-block;
+	color: inherit;
+	text-decoration: none;
+}
+
+.brand-wordmark {
+	display: inline-flex;
+	align-items: baseline;
+	white-space: nowrap;
+	font-family: Georgia, 'Times New Roman', serif;
+	font-size: 23px;
+	font-weight: 700;
+	line-height: 1;
+}
+
+.brand-book {
+	color: #205b8d;
+}
+
+.brand-store {
+	color: #d56a3a;
+}

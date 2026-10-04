@@ -1,0 +1,14 @@
+<form class="form-header" onsubmit="return false;" method="GET">
+    <input
+        [formControl]="searchControl"
+        class="au-input au-input-xl" 
+        type="text"
+        placeholder="Search for data ..." 
+        />
+    <button
+        (click)="getProductsBySeach(searchControl.value)"
+        class="au-btn-submit" 
+        type="submit">
+        Search
+    </button>
+</form>

@@ -1,0 +1,63 @@
+<main class="main-content detail-main">
+    <div class="book-detail-page">
+        @if (product; as selectedProduct) {
+            <nav class="book-breadcrumbs" aria-label="Breadcrumb">
+                <a routerLink="/products">Books</a>
+                <span aria-hidden="true">/</span>
+                <span>{{selectedProduct.name}}</span>
+            </nav>
+
+            <div class="book-detail-grid">
+                <div class="book-cover-stage">
+                    <span class="cover-label">BOOK / {{selectedProduct.sku}}</span>
+                    <img [src]="selectedProduct.imageUrl" [alt]="selectedProduct.name + ' cover'" class="book-cover">
+                </div>
+
+                <section class="book-purchase" aria-labelledby="book-title">
+                    <p class="book-eyebrow">THE BOOKSHELF</p>
+                    <h1 id="book-title">{{selectedProduct.name}}</h1>
+                    <div class="book-stock">
+                        @if (selectedProduct.active && selectedProduct.unitsInStock > 0) {
+                            <span class="stock-indicator"></span>
+                            <span>In stock</span>
+                            <span class="stock-count">{{selectedProduct.unitsInStock}} available</span>
+                        } @else {
+                            <span class="out-of-stock">Currently unavailable</span>
+                        }
+                    </div>
+
+                    <div class="book-price-row">
+                        <span>Price</span>
+                        <strong>{{selectedProduct.unitPrice | currency:'USD'}}</strong>
+                    </div>
+
+                    <button type="button" class="primary-btn detail-add-button"
+                            [disabled]="!selectedProduct.active || selectedProduct.unitsInStock < 1"
+                            (click)="addToCart()">
+                        Add to cart
+                    </button>
+                    @if (addedToCart) {
+                        <p class="cart-confirmation" role="status">Added to your cart.</p>
+                    }
+                    <p class="sku-note">Reference: {{selectedProduct.sku}}</p>
+                </section>
+            </div>
+
+            <section class="book-description" aria-labelledby="description-title">
+                <div class="description-heading">
+                    <span>01</span>
+                    <h2 id="description-title">About this book</h2>
+                </div>
+                <p>{{selectedProduct.description}}</p>
+            </section>
+        } @else if (errorMessage) {
+            <section class="detail-message" role="alert">
+                <h1>We couldn't find that book</h1>
+                <p>{{errorMessage}}</p>
+                <a routerLink="/products">Back to the books</a>
+            </section>
+        } @else {
+            <p class="detail-loading" role="status">Loading book details...</p>
+        }
+    </div>
+</main>
